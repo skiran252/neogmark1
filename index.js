@@ -1,25 +1,25 @@
 const chalk = require('chalk');
+const fs = require('fs');
+const stringsimilarity = require('string-similarity-js');
 var readlineSync = require("readline-sync");
-const game = require("./playground");
-console.log(chalk.blue("\n\nHi! I am SaiKiran Gongunta\n\n"));
-console.log(chalk.green("This is CLI based Quiz Game. please enjoy\n\n"));
+console.log(chalk.bold.yellow("\n\nHi! this is a quiz on how much do you know me(SAIKIRAN GONUGUNTA)\n\n"));
 
+const username = readlineSync.question("PLEASE ENTER YOUR NAME: ");
 
-const username = readlineSync.question(chalk.blue("PLEASE ENTER YOUR NAME HERE > "));
-console.log(chalk.green("\n\n\t\t\tWELCOME "+username+" \n\n"));
+let rawdata = fs.readFileSync('questions.json');
+let questions = JSON.parse(rawdata).questions;
+let score = 0;
 
-console.log("\nTo start this game i need to take few preferences to get quiz of your choice\n");
-let topic = readlineSync.question(chalk.yellow("choose a topic from (Linux,Bash,Docker,SQL,CMS,Code,Devops or just press enter: "));
-topic = topic.charAt(0).toUpperCase()+topic.slice(1).toLowerCase();
-let difficulty = readlineSync.question(chalk.magenta("Choose Difficulty easy medium or hard > "));
-difficulty = difficulty.charAt(0).toUpperCase()+difficulty.slice(1).toLowerCase();
+questions.forEach((question) => {
+  const answer = readlineSync.question(chalk.bold.white("\n"+question.question+ " "));
+  if (stringsimilarity.stringSimilarity(answer,question.answer)>0.6) {
+    score+=1;
+    console.log(chalk.bold.green("\nRIGHT! YOU SCORE 1 POINT\n"));
+  } else {
+    console.log(chalk.bold.red("\nYOU GOT THIS ONE WRONG\n"));
 
-const numOfQuestions = parseInt(readlineSync.question("choose number of questions > "));
+  }
+});
 
-console.log(chalk.green("\n\nStarting quiz...\n"));
-
-try {
-game(username,topic,difficulty,numOfQuestions);
-} catch(err) {
-  console.log(err);
-}
+console.log(chalk.magenta("\n\n\t\t\tThank you "+username+" \n\n"));
+console.log(chalk.blue("YOU SCORED",score,"/",questions.length,"\n\n"));

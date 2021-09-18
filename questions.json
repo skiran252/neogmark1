@@ -1,0 +1,24 @@
+{
+    "questions": [
+        {
+            "question": "what is my nickname?",
+            "answer": "kiran"
+        },
+        {
+            "question": "where do i live?",
+            "answer": "hyderabad"
+        },
+        {
+            "question":"what was my cgpa in SSC?",
+            "answer":"9.3"
+        },
+        {
+            "question":"which company do i work for now?",
+            "answer":"ivy"
+        },
+        {
+            "question":"what is my interested area in software development?",
+            "answer":"web development"
+        }
+    ]
+}
