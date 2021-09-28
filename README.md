@@ -1,6 +1,6 @@
-# PIRATE SPEAK TRANSLATOR
+# CLI BASED QUIZ On Cyber Security
 
-converts english to pirate speak language using funtranslations api
+uses node cli to interact with command line
 ---
 ## Technologies used
 - NodeJS
